@@ -2,8 +2,10 @@ def putsd(message)
   puts message if ENV['DEBUG'] == 'true'
 end
 
+puts "Seeding database, this could take a minute or two. Stand by..."
 Dir.entries(Rails.root.join('data')).select { |entry| %w[. ..].exclude?(entry) }.each do |type|
   putsd "Scanning folder #{type}"
+  unit_type = UnitType.where(name: type).first_or_create
   Dir.glob("#{Rails.root}/data/#{type}/**/*.mtf") do |file|
     putsd "Processing file #{file}"
     lines = File.readlines(file)
@@ -11,7 +13,7 @@ Dir.entries(Rails.root.join('data')).select { |entry| %w[. ..].exclude?(entry) }
     variant = lines[2].gsub("\r\n", '')
     mul_id = lines[3].scan(/\d+/).first.to_i
 
-    Unit.where(name: name, variant: variant, unit_type: type, mul_id: mul_id).first_or_create
+    Unit.where(name: name, variant: variant, unit_type: unit_type, mul_id: mul_id).first_or_create
     putsd "Processed #{name} #{variant}"
   end
 
@@ -24,7 +26,7 @@ Dir.entries(Rails.root.join('data')).select { |entry| %w[. ..].exclude?(entry) }
     mul_id = blk_file.value_in('mul id:').to_i
     raise "mul id is blank!" if mul_id.nil?
 
-    Unit.where(name: name, variant: variant, unit_type: type, mul_id: mul_id).first_or_create
+    Unit.where(name: name, variant: variant, unit_type: unit_type, mul_id: mul_id).first_or_create
     putsd "Processed #{name} #{variant}"
   end
 end
