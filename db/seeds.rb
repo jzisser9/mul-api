@@ -3,7 +3,7 @@ def putsd(message)
 end
 
 puts "Seeding database, this could take a minute or two. Stand by..."
-Dir.entries(Rails.root.join('data')).select { |entry| %w[. ..].exclude?(entry) }.each do |type|
+Dir.entries(Rails.root.join('data')).select { |entry| %w[. .. .keep].exclude?(entry) }.each do |type|
   putsd "Scanning folder #{type}"
   unit_type = UnitType.where(name: type).first_or_create
   Dir.glob("#{Rails.root}/data/#{type}/**/*.mtf") do |file|
