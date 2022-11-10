@@ -1,24 +1,5 @@
-# README
+# MUL API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+This API serves as a database for IDs from masterunitlist.info. There is currently no publicly-available API to access 
+unit information. However, the MegaMek project has a database of units and their IDs on the MUL. This API serves those 
+IDs to be used for client applications. 
