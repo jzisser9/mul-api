@@ -1,7 +1,30 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
-#   Character.create(name: "Luke", movie: movies.first)
+def putsd(message)
+  puts message if ENV['DEBUG'] == 'true'
+end
+
+Dir.entries(Rails.root.join('data')).select { |entry| %w[. ..].exclude?(entry) }.each do |type|
+  putsd "Scanning folder #{type}"
+  Dir.glob("#{Rails.root}/data/#{type}/**/*.mtf") do |file|
+    putsd "Processing file #{file}"
+    lines = File.readlines(file)
+    name = lines[1].gsub("\r\n", '')
+    variant = lines[2].gsub("\r\n", '')
+    mul_id = lines[3].scan(/\d+/).first.to_i
+
+    Unit.where(name: name, variant: variant, unit_type: type, mul_id: mul_id).first_or_create
+    putsd "Processed #{name} #{variant}"
+  end
+
+  Dir.glob("#{Rails.root}/data/#{type}/**/*.blk") do |file|
+    putsd "Processing file #{file}"
+    blk_file = BlkFile.new(file)
+    name = blk_file.value_in('Name')
+    raise "name is blank!" if name.nil?
+    variant = blk_file.value_in('Model')
+    mul_id = blk_file.value_in('mul id:').to_i
+    raise "mul id is blank!" if mul_id.nil?
+
+    Unit.where(name: name, variant: variant, unit_type: type, mul_id: mul_id).first_or_create
+    putsd "Processed #{name} #{variant}"
+  end
+end
