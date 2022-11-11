@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: mul_api_production
-  username: mul_api
+  username: mul_api_prod
   password: <%= ENV["MUL_API_DATABASE_PASSWORD"] %>
