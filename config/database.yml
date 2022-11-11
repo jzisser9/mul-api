@@ -83,4 +83,4 @@ production:
   <<: *default
   database: mul_api_production
   username: mul_api_prod
-  password: <%= ENV["MUL_API_DATABASE_PASSWORD"] %>
+  password: <%= Rails.application.credentials.mul_api_database_password %>
