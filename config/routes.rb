@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  resources :unit_types, only: %i[index show]
-  resources :units, only: %i[index show]
+  # resources :unit_types, only: %i[index show]
+  # resources :units, only: %i[index show]
+
+  mount API => '/'
 end
