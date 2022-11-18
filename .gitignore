@@ -30,3 +30,6 @@
 
 /data/**/*.*
 !/data/.keep
+
+.idea/
+.DS_Store
