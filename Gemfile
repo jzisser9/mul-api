@@ -52,5 +52,4 @@ gem "grape", "~> 1.6"
 gem "grape-entity", "~> 0.10.2"
 gem "grape_on_rails_routes", "~> 0.3.2"
 gem "nokogiri", "~> 1.13"
-
 gem "rack-cors", "~> 1.1"

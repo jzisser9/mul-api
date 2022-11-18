@@ -1,0 +1,167 @@
+<head>
+  <style>
+      html, body {
+          font-family: "Helvetica Neue", Helvetica, Arial, Sans-Serif;
+      }
+
+      body {
+          print-color-adjust: exact;
+          -webkit-print-color-adjust: exact;
+      }
+
+      .sheet {
+          page-break-after: always;
+          display: grid;
+          grid-template-columns: repeat(6, 147px);
+          grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-areas:
+                    "header header header header header header"
+                    "token0 token1 token2 token3 token4 token5"
+                    "token6 token7 token8 token9 token10 token11"
+      }
+
+      .header {
+          text-align: center;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          grid-area: header;
+      }
+
+      .header div {
+          padding: 0 5px;
+      }
+
+      .token {
+          border: 1px dotted black;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+          grid-template-rows: 33px 29px 200px 200px 29px 33px;
+          grid-template-areas:
+                "tab1-left tab1-right"
+                "tab1-bottom tab1-bottom"
+                "rear rear"
+                "front front"
+                "tab2-bottom tab2-bottom"
+                "tab2-left tab2-right";
+      }
+
+      .tab1-left, .tab2-left {
+          background: #d1d2d4;
+          border-right: 2px dotted black;
+      }
+
+      .tab1-left {
+          grid-area: tab1-left;
+      }
+
+      .tab2-left {
+          grid-area: tab2-left;
+      }
+
+      .tab1-right, .tab2-right {
+          background: #d1d2d4;
+      }
+
+      .tab1-right {
+          grid-area: tab1-right;
+      }
+
+      .tab2-right {
+          grid-area: tab2-right;
+      }
+
+      .tab1-bottom, .tab2-bottom {
+          background: #d1d2d4;
+      }
+
+      .tab1-bottom {
+          grid-area: tab1-bottom;
+      }
+
+      .tab2-bottom {
+          grid-area: tab2-bottom;
+      }
+
+      .rear, .front {
+          display: flex;
+          flex-flow: column nowrap;
+          border-bottom: 2px dashed black;
+      }
+
+      .rear {
+          grid-area: rear;
+          border-top: 2px dashed black;
+      }
+
+      .rear > * {
+          transform: rotate(180deg);
+          opacity: 0.5;
+      }
+
+      .front {
+          grid-area: front;
+      }
+
+      .image {
+          flex: 2 1 auto;
+
+      }
+
+      .image img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+      }
+
+      .label {
+          flex: 1 0 auto;
+      }
+
+      .image, .label {
+          min-height: 0px;
+          text-align: center;
+      }
+  </style>
+</head>
+<body>
+<% units.each_slice(12) do |unit_batch| %>
+  <div class="sheet">
+    <div class="header">
+      <div style="font-weight: bold;">Cut:</div>
+      <div style="width: 100px; border-top: 2px dotted black"></div>
+      <div style="font-weight: bold;">Fold:</div>
+      <div style="width: 100px; border-top: 2px dashed black"></div>
+    </div>
+    <% unit_batch.each_with_index do |unit, i| %>
+      <div class="token" style="grid-area: token<%= i %>;">
+        <div class="tab1-left"></div>
+        <div class="tab1-right"></div>
+        <div class="tab1-bottom"></div>
+        <div class="rear">
+          <div class="image">
+            <%= image_tag unit.image_url %>
+          </div>
+          <div class="label">
+            <div><%= unit.name.upcase %> <%= unit.variant.upcase %></div>
+            <div>REAR</div>
+          </div>
+        </div>
+        <div class="front">
+          <div class="label">
+            <div><%= unit.name.upcase %> <%= unit.variant.upcase %></div>
+            <div>FRONT</div>
+          </div>
+          <div class="image">
+            <%= image_tag unit.image_url %>
+          </div>
+        </div>
+        <div class="tab2-bottom"></div>
+        <div class="tab2-left"></div>
+        <div class="tab2-right"></div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+</body>
