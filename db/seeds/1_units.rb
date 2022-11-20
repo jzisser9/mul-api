@@ -4,7 +4,7 @@ end
 
 puts "Seeding Units"
 
-Dir.entries(Rails.root.join('data')).select { |entry| %w[. .. unofficial .keep].exclude?(entry) }.each do |type|
+Dir.entries(Rails.root.join('data')).select { |entry| %w[. .. unofficial .keep .DS_Store].exclude?(entry) }.each do |type|
   putsd "Scanning folder #{type}"
   unit_type = UnitType.where(name: type).first_or_create
   Dir.glob("#{Rails.root}/data/#{type}/**/*.mtf") do |file|
