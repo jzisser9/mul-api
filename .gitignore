@@ -33,3 +33,7 @@
 
 .idea/
 .DS_Store
+
+yarn-debug.log*
+.yarn-integrity
+.env

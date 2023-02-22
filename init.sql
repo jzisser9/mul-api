@@ -1,0 +1,2 @@
+CREATE USER mul-api;
+ALTER USER mul-api WITH SUPERUSER;

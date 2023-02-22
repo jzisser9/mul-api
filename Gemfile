@@ -48,6 +48,7 @@ group :development do
   # gem "spring"
 end
 
+gem "dotenv-rails"
 gem "grape", "~> 1.6"
 gem "grape-entity", "~> 0.10.2"
 gem "grape_on_rails_routes", "~> 0.3.2"
