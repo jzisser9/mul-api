@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/jzisser9/mul-api/compare/v1.3.0...v1.4.0) (2025-10-07)
+
+
+### Features
+
+* improve Docker database configuration and deployment documentation ([46414bc](https://github.com/jzisser9/mul-api/commit/46414bc8e8a4a5bf41104e940b0def3bf38a03ea))
+
 # [1.3.0](https://github.com/jzisser9/mul-api/compare/v1.2.0...v1.3.0) (2025-10-07)
 
 
