@@ -19,6 +19,10 @@ export PATH="./bin:$PATH"
 echo "📦 Installing Ruby gems..."
 bundle install
 
+# Recompile native extensions to ensure compatibility
+echo "🔧 Recompiling native gems for current environment..."
+bundle pristine --all || echo "Warning: Some gems may need manual reinstallation"
+
 # Wait for database to be ready
 echo "⏳ Waiting for database to be ready..."
 until pg_isready -h db -p 5432 -U postgres; do
