@@ -14,7 +14,8 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
       "version": "18"
-    }
+    },
+    "ghcr.io/devcontainers-extra/features/1password-cli:1": {}
   },
 
   // Configure tool-specific properties
