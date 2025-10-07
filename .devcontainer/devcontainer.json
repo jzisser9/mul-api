@@ -6,6 +6,10 @@
   
   // Features to add to the dev container
   "features": {
+    "ghcr.io/devcontainers/features/ruby:1": {
+      "version": "3.1.2",
+      "installGems": "bundler,rails"
+    },
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/node:1": {
@@ -17,8 +21,7 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "rebornix.Ruby",
-        "wingrunr21.vscode-ruby",
+        "shopify.ruby-lsp",
         "kaiwood.endwise",
         "connorshea.vscode-ruby-test-adapter",
         "bradlc.vscode-tailwindcss",
@@ -31,13 +34,27 @@
         "github.copilot-chat"
       ],
       "settings": {
-        "ruby.useLanguageServer": true,
-        "ruby.lint": {
-          "rubocop": {
-            "useBundler": true
-          }
+        "rubyLsp.enabledFeatures": {
+          "codeActions": true,
+          "diagnostics": true,
+          "documentHighlights": true,
+          "documentLink": true,
+          "documentSymbols": true,
+          "foldingRanges": true,
+          "formatting": true,
+          "hover": true,
+          "inlayHint": true,
+          "onTypeFormatting": true,
+          "selectionRanges": true,
+          "semanticHighlighting": true,
+          "completion": true,
+          "codeLens": true,
+          "definition": true,
+          "workspaceSymbol": true,
+          "signatureHelp": true,
+          "typeHierarchy": true
         },
-        "ruby.format": "rubocop",
+        "rubyLsp.formatter": "rubocop",
         "files.associations": {
           "*.rb": "ruby",
           "*.erb": "erb",
@@ -70,12 +87,19 @@
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "vscode",
 
+  // Enable SSH agent forwarding
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
+    "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind,consistency=cached"
+  ],
+
   // Set environment variables
   "containerEnv": {
     "DATABASE_HOST": "db",
     "DATABASE_USER": "postgres",
     "DATABASE_PASSWORD": "password",
     "DATABASE_PORT": "5432",
-    "RAILS_ENV": "development"
+    "RAILS_ENV": "development",
+    "SSH_AUTH_SOCK": "/ssh-agent"
   }
 }

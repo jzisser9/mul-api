@@ -23,6 +23,9 @@ services:
     volumes:
       - ..:/workspace:cached
       - bundle-cache:/usr/local/bundle
+      # SSH agent forwarding
+      - ${SSH_AUTH_SOCK:-/dev/null}:/ssh-agent
+      - ${HOME}/.ssh:/home/vscode/.ssh:ro
     working_dir: /workspace
     command: sleep infinity
     depends_on:
@@ -34,6 +37,7 @@ services:
       DATABASE_PORT: 5432
       RAILS_ENV: development
       BUNDLE_PATH: /usr/local/bundle
+      SSH_AUTH_SOCK: /ssh-agent
     ports:
       - "3001:3001"
     networks:

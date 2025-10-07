@@ -14,6 +14,54 @@ IDs to be used for client applications.
 5. Do the usual Rails stuff (`bundle install`, `rails db:setup`, etc)
 6. Seed your database from the MM data files with `rails db:seed`.
 
+## Development Container Setup
+
+This project includes a VS Code dev container configuration for consistent development environments.
+
+### Prerequisites for SSH/Git Access
+
+To push to GitHub from within the dev container, you need SSH agent forwarding configured:
+
+**On macOS/Linux:**
+```bash
+# Start SSH agent (if not already running)
+eval $(ssh-agent -s)
+
+# Add your SSH key
+ssh-add ~/.ssh/id_rsa  # or your specific key file
+
+# Verify your key is added
+ssh-add -l
+```
+
+**On Windows:**
+```powershell
+# Start SSH agent service
+Set-Service -Name ssh-agent -StartupType Automatic
+Start-Service ssh-agent
+
+# Add your SSH key
+ssh-add ~\.ssh\id_rsa  # or your specific key file
+```
+
+### Using the Dev Container
+
+1. **Open in VS Code**: Open this repository in VS Code
+2. **Reopen in Container**: Use the "Reopen in Container" prompt or Command Palette
+3. **Test SSH**: Run `.devcontainer/check-git-ssh.sh` to verify SSH connectivity
+4. **Configure Git** (if needed):
+   ```bash
+   git config --global user.name "Your Name"
+   git config --global user.email "your.email@example.com"
+   ```
+
+The dev container automatically:
+- Sets up Ruby 3.1.2, Rails, and PostgreSQL using dev container features
+- Installs Ruby LSP for enhanced IDE experience with modern tooling
+- Installs all dependencies and sets up the database
+- Forwards your SSH credentials for Git operations
+- Configures RuboCop for code formatting and linting
+
 ## CI/CD Pipeline
 
 This project uses GitHub Actions for continuous integration and deployment with the following features:
