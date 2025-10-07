@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/jzisser9/mul-api/compare/v1.5.0...v1.5.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* improve database connectivity error handling and diagnostics ([24ac27f](https://github.com/jzisser9/mul-api/commit/24ac27fd4ca955f059a2d749866d8e9ffb80b065))
+
 # [1.5.0](https://github.com/jzisser9/mul-api/compare/v1.4.0...v1.5.0) (2025-10-07)
 
 
