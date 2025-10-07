@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/jzisser9/mul-api/compare/v1.0.1...v1.0.2) (2025-10-07)
+
+
+### Bug Fixes
+
+* configure Ruby LSP for dev container environment ([e27c9d1](https://github.com/jzisser9/mul-api/commit/e27c9d1ea7a73929321f0740b4fd0b431e8dffca))
+
 ## [1.0.1](https://github.com/jzisser9/mul-api/compare/v1.0.0...v1.0.1) (2025-10-07)
 
 
