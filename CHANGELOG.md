@@ -1,3 +1,17 @@
+# [1.1.0](https://github.com/jzisser9/mul-api/compare/v1.0.2...v1.1.0) (2025-10-07)
+
+
+### Bug Fixes
+
+* add native gem recompilation to post-create script ([0ef2635](https://github.com/jzisser9/mul-api/commit/0ef2635fba8523576668287313240858b2ac5f8d))
+* configure Ruby Test Explorer for RSpec integration ([8e35d26](https://github.com/jzisser9/mul-api/commit/8e35d26559b05ed6e6c0b86f91871edf4af39062))
+* restore SSH agent forwarding for GitHub authentication ([75b9629](https://github.com/jzisser9/mul-api/commit/75b9629d19e02c063b84bd50d0a38b18afd7b402))
+
+
+### Features
+
+* add 1Password CLI support to dev container ([c68b9f8](https://github.com/jzisser9/mul-api/commit/c68b9f8b75a54fd5cd58c9a81b3765dff83a6589))
+
 ## [1.0.2](https://github.com/jzisser9/mul-api/compare/v1.0.1...v1.0.2) (2025-10-07)
 
 
