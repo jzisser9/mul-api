@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/jzisser9/mul-api/compare/v1.4.0...v1.5.0) (2025-10-07)
+
+
+### Features
+
+* simplify Docker configuration with hardcoded credentials for public API ([59b2ddc](https://github.com/jzisser9/mul-api/commit/59b2ddc3aeb0f991abb4c1ee52b8781569580fda))
+
 # [1.4.0](https://github.com/jzisser9/mul-api/compare/v1.3.0...v1.4.0) (2025-10-07)
 
 
