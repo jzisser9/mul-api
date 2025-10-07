@@ -12,8 +12,19 @@ echo "====================================="
 # Wait for database to be ready if host is specified
 if [ -n "$DATABASE_HOST" ]; then
   echo "Waiting for database at $DATABASE_HOST:${DATABASE_PORT:-5432}..."
-  timeout 60 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' "$DATABASE_HOST" "${DATABASE_PORT:-5432}"
-  echo "Database is ready!"
+  
+  # Try to connect with timeout and better error handling
+  if timeout 60 bash -c 'until printf "" 2>>/dev/null >>/dev/tcp/$0/$1; do sleep 1; done' "$DATABASE_HOST" "${DATABASE_PORT:-5432}"; then
+    echo "Database is ready!"
+  else
+    echo "❌ Failed to connect to database at $DATABASE_HOST:${DATABASE_PORT:-5432}"
+    echo "Please check:"
+    echo "  1. DATABASE_HOST points to correct PostgreSQL server"
+    echo "  2. PostgreSQL is running and accepting connections"
+    echo "  3. Network connectivity between containers"
+    echo "  4. Firewall/security group settings"
+    exit 1
+  fi
 fi
 
 # Run database operations
