@@ -117,16 +117,17 @@ jobs:
           tags: |
             type=ref,event=branch
             type=ref,event=pr
-            type=semver,pattern={{version}},value=${{ needs.semantic-release.outputs.new-release-version }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ needs.semantic-release.outputs.new-release-version }}
-            type=semver,pattern={{major}},value=${{ needs.semantic-release.outputs.new-release-version }}
+            type=semver,pattern={{version}},value=${{ needs.semantic-release.outputs.new-release-version }},enable=${{ needs.semantic-release.outputs.new-release-published == 'true' }}
+            type=semver,pattern={{major}}.{{minor}},value=${{ needs.semantic-release.outputs.new-release-version }},enable=${{ needs.semantic-release.outputs.new-release-published == 'true' }}
+            type=semver,pattern={{major}},value=${{ needs.semantic-release.outputs.new-release-version }},enable=${{ needs.semantic-release.outputs.new-release-published == 'true' }}
+            type=raw,value=stable,enable=${{ needs.semantic-release.outputs.new-release-published == 'true' }}
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.production
+          file: ./Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
@@ -137,8 +138,17 @@ jobs:
       - name: Generate deployment summary
         if: needs.semantic-release.outputs.new-release-published == 'true'
         run: |
+          VERSION=${{ needs.semantic-release.outputs.new-release-version }}
+          MAJOR=$(echo $VERSION | cut -d. -f1)
+          MINOR=$(echo $VERSION | cut -d. -f1-2)
+          
           echo "## 🚀 Deployment Summary" >> $GITHUB_STEP_SUMMARY
-          echo "- **New Version**: ${{ needs.semantic-release.outputs.new-release-version }}" >> $GITHUB_STEP_SUMMARY
-          echo "- **Docker Image**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.semantic-release.outputs.new-release-version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "- **New Version**: $VERSION" >> $GITHUB_STEP_SUMMARY
+          echo "- **Docker Tags Created**:" >> $GITHUB_STEP_SUMMARY
+          echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$VERSION\` (full version)" >> $GITHUB_STEP_SUMMARY
+          echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$MINOR\` (major.minor)" >> $GITHUB_STEP_SUMMARY
+          echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:$MAJOR\` (major)" >> $GITHUB_STEP_SUMMARY
+          echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:stable\` (stable release)" >> $GITHUB_STEP_SUMMARY
+          echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\` (latest from main)" >> $GITHUB_STEP_SUMMARY
           echo "- **Platforms**: linux/amd64, linux/arm64" >> $GITHUB_STEP_SUMMARY
           echo "- **Registry**: ${{ env.REGISTRY }}" >> $GITHUB_STEP_SUMMARY
