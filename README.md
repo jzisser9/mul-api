@@ -92,29 +92,25 @@ The images are tagged with:
 
 ### Running with Docker
 
-#### Development
+#### Quick Start (Recommended)
 ```bash
-docker-compose up
+# Start everything with Docker Compose
+./start.sh
+
+# Or manually:
+docker-compose up --build
 ```
 
-#### Production
+This starts both PostgreSQL and the Rails API with simple, pre-configured credentials.
 
-**Option 1: Using DATABASE_URL**
-```bash
-docker pull ghcr.io/jzisser9/mul-api:latest
-docker run -p 3001:3001 \
-  -e DATABASE_URL=postgres://user:password@host:port/database_name \
-  -e RAILS_ENV=production \
-  ghcr.io/jzisser9/mul-api:latest
-```
-
-**Option 2: Using individual database environment variables**
+#### Production Deployment
+**Simple setup (matches docker-compose.yml):**
 ```bash
 docker pull ghcr.io/jzisser9/mul-api:latest
 docker run -p 3001:3001 \
   -e DATABASE_HOST=your-postgres-host \
-  -e DATABASE_USER=your-postgres-user \
-  -e DATABASE_PASSWORD=your-postgres-password \
+  -e DATABASE_USER=postgres \
+  -e DATABASE_PASSWORD=password \
   -e DATABASE_PORT=5432 \
   -e RAILS_ENV=production \
   -e RAILS_LOG_TO_STDOUT=true \
@@ -122,25 +118,33 @@ docker run -p 3001:3001 \
   ghcr.io/jzisser9/mul-api:latest
 ```
 
+**Or using DATABASE_URL:**
+```bash
+docker pull ghcr.io/jzisser9/mul-api:latest
+docker run -p 3001:3001 \
+  -e DATABASE_URL=postgres://postgres:password@your-host:5432/mul_api_production \
+  -e RAILS_ENV=production \
+  ghcr.io/jzisser9/mul-api:latest
+```
+
 ### Container Environment Configuration
 
-The following environment variables are required for production deployment:
+#### Simple Database Setup (Public API)
+For the easiest deployment, use these exact values (matches docker-compose.yml):
+- `DATABASE_HOST=your-postgres-host` (or `db` for Docker Compose)
+- `DATABASE_USER=postgres`
+- `DATABASE_PASSWORD=password`
+- `DATABASE_PORT=5432`
 
-#### Database Connection (Required)
-- `DATABASE_HOST` - PostgreSQL server hostname
-- `DATABASE_USER` - PostgreSQL username  
-- `DATABASE_PASSWORD` - PostgreSQL password
-- `DATABASE_PORT` - PostgreSQL port (default: 5432)
+Or as a single URL:
+- `DATABASE_URL=postgres://postgres:password@your-host:5432/mul_api_production`
 
-Alternatively, use:
-- `DATABASE_URL` - Full PostgreSQL connection string
-
-#### Rails Configuration (Recommended)
+#### Rails Configuration
 - `RAILS_ENV=production` - Run in production mode
 - `RAILS_LOG_TO_STDOUT=true` - Log to container stdout for monitoring
 - `RAILS_SERVE_STATIC_FILES=true` - Serve static assets without nginx
 
-See `.env.example` for a complete configuration template.
+**Note**: These are simple credentials suitable for public data only. See `.env.example` for the complete template.
 
 ### Workflow Details
 
