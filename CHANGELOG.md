@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/jzisser9/mul-api/compare/v1.5.1...v1.5.2) (2025-10-07)
+
+
+### Bug Fixes
+
+* configure Rails master key for encrypted credentials ([775902b](https://github.com/jzisser9/mul-api/commit/775902be54b782fe0fbcd6e422f66853f368432f))
+
 ## [1.5.1](https://github.com/jzisser9/mul-api/compare/v1.5.0...v1.5.1) (2025-10-07)
 
 
