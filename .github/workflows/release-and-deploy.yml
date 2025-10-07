@@ -135,6 +135,19 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Trigger Portainer webhook
+        if: needs.semantic-release.outputs.new-release-published == 'true'
+        run: |
+          if [ -n "${{ secrets.PORTAINER_WEBHOOK_URL }}" ]; then
+            echo "Triggering Portainer webhook for automatic redeployment..."
+            curl -X POST "${{ secrets.PORTAINER_WEBHOOK_URL }}" \
+              -H "Content-Type: application/json" \
+              -d '{"tag": "${{ needs.semantic-release.outputs.new-release-version }}"}'
+            echo "Portainer webhook triggered successfully"
+          else
+            echo "PORTAINER_WEBHOOK_URL secret not configured, skipping webhook"
+          fi
+
       - name: Generate deployment summary
         if: needs.semantic-release.outputs.new-release-published == 'true'
         run: |
@@ -152,3 +165,4 @@ jobs:
           echo "  - \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest\` (latest from main)" >> $GITHUB_STEP_SUMMARY
           echo "- **Platforms**: linux/amd64, linux/arm64" >> $GITHUB_STEP_SUMMARY
           echo "- **Registry**: ${{ env.REGISTRY }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Portainer**: $( [ -n "${{ secrets.PORTAINER_WEBHOOK_URL }}" ] && echo "✅ Webhook triggered" || echo "⚠️ Webhook not configured" )" >> $GITHUB_STEP_SUMMARY
