@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jzisser9/mul-api/compare/v1.0.0...v1.0.1) (2025-10-07)
+
+
+### Bug Fixes
+
+* add aarch64-linux platform for ARM64 Docker builds ([3b0cafe](https://github.com/jzisser9/mul-api/commit/3b0cafe48faddfedd6470af19f527992f426f2c4))
+
 # 1.0.0 (2025-10-07)
 
 
