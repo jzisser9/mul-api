@@ -23,5 +23,13 @@
     "workspaceSymbol": true,
     "signatureHelp": true,
     "typeHierarchy": true
-  }
+  },
+  "rubyTestExplorer.rspecCommand": "bundle exec rspec",
+  "rubyTestExplorer.testFramework": "rspec",
+  "rubyTestExplorer.minitestCommand": "bundle exec rake test",
+  "rubyTestExplorer.testDirectory": "./spec",
+  "rubyTestExplorer.filePattern": [
+    "*_spec.rb",
+    "**/*_spec.rb"
+  ]
 }

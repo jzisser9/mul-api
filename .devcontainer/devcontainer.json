@@ -6,23 +6,17 @@
   
   // Features to add to the dev container
   "features": {
-    "ghcr.io/devcontainers/features/ruby:1": {
-      "version": "3.1.2",
-      "installGems": "bundler"
-    },
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/github-cli:1": {},
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "18"
-    },
-    "ghcr.io/devcontainers-extra/features/1password-cli:1": {}
+    "ghcr.io/devcontainers/features/node:1": {}
   },
 
   // Configure tool-specific properties
   "customizations": {
     "vscode": {
       "extensions": [
-        "shopify.ruby-lsp",
+        "rebornix.Ruby",
+        "wingrunr21.vscode-ruby",
         "kaiwood.endwise",
         "connorshea.vscode-ruby-test-adapter",
         "bradlc.vscode-tailwindcss",
@@ -32,35 +26,17 @@
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-typescript-next",
         "github.copilot",
-        "github.copilot-chat"
+        "github.copilot-chat",
+        "Shopify.ruby-lsp"
       ],
       "settings": {
-        "rubyLsp.enabledFeatures": {
-          "codeActions": true,
-          "diagnostics": true,
-          "documentHighlights": true,
-          "documentLink": true,
-          "documentSymbols": true,
-          "foldingRanges": true,
-          "formatting": true,
-          "hover": true,
-          "inlayHint": true,
-          "onTypeFormatting": true,
-          "selectionRanges": true,
-          "semanticHighlighting": true,
-          "completion": true,
-          "codeLens": true,
-          "definition": true,
-          "workspaceSymbol": true,
-          "signatureHelp": true,
-          "typeHierarchy": true
+        "ruby.useLanguageServer": true,
+        "ruby.lint": {
+          "rubocop": {
+            "useBundler": true
+          }
         },
-        "rubyLsp.rubyVersionManager": {
-          "identifier": "none"
-        },
-        "rubyLsp.customRubyCommand": "/usr/local/rvm/gems/ruby-3.1.2/bin/ruby",
-        "rubyLsp.bundleGemfile": "/workspace/Gemfile",
-        "rubyLsp.formatter": "rubocop",
+        "ruby.format": "rubocop",
         "files.associations": {
           "*.rb": "ruby",
           "*.erb": "erb",
@@ -70,7 +46,15 @@
         },
         "emmet.includeLanguages": {
           "erb": "html"
-        }
+        },
+        "rubyTestExplorer.rspecCommand": "bundle exec rspec",
+        "rubyTestExplorer.testFramework": "rspec",
+        "rubyTestExplorer.minitestCommand": "bundle exec rake test",
+        "rubyTestExplorer.testDirectory": "./spec",
+        "rubyTestExplorer.filePattern": [
+          "*_spec.rb",
+          "**/*_spec.rb"
+        ]
       }
     }
   },
@@ -93,19 +77,12 @@
   // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root
   "remoteUser": "vscode",
 
-  // Enable SSH agent forwarding
-  "mounts": [
-    "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached",
-    "source=${localEnv:SSH_AUTH_SOCK},target=/ssh-agent,type=bind,consistency=cached"
-  ],
-
   // Set environment variables
   "containerEnv": {
     "DATABASE_HOST": "db",
     "DATABASE_USER": "postgres",
     "DATABASE_PASSWORD": "password",
     "DATABASE_PORT": "5432",
-    "RAILS_ENV": "development",
-    "SSH_AUTH_SOCK": "/ssh-agent"
+    "RAILS_ENV": "development"
   }
 }
