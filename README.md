@@ -13,3 +13,56 @@ IDs to be used for client applications.
 4. Move these folders into MUL API's `/data` directory.
 5. Do the usual Rails stuff (`bundle install`, `rails db:setup`, etc)
 6. Seed your database from the MM data files with `rails db:seed`.
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment with the following features:
+
+### Semantic Versioning
+The project uses [Semantic Release](https://semantic-release.gitbook.io/) for automated versioning based on commit messages. Follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
+
+- `fix:` - patch version (e.g., 1.0.1)
+- `feat:` - minor version (e.g., 1.1.0) 
+- `feat!:` or `fix!:` or any commit with `BREAKING CHANGE:` - major version (e.g., 2.0.0)
+
+Examples:
+```
+feat: add new unit search endpoint
+fix: resolve database connection issue
+feat!: change API response format (breaking change)
+```
+
+### Docker Images
+Production-ready Docker images are automatically built and pushed to GitHub Container Registry (ghcr.io) for:
+- Every commit to the `main` branch
+- Every pull request (for testing)
+
+The images are tagged with:
+- Version numbers (e.g., `v1.2.3`)
+- Branch names (e.g., `main`)
+- `latest` tag for the main branch
+
+### Running with Docker
+
+#### Development
+```bash
+docker-compose up
+```
+
+#### Production
+```bash
+docker pull ghcr.io/jzisser9/mul-api:latest
+docker run -p 3001:3001 \
+  -e DATABASE_URL=your_database_url \
+  -e RAILS_ENV=production \
+  ghcr.io/jzisser9/mul-api:latest
+```
+
+### Workflow Details
+
+The `.github/workflows/release-and-deploy.yml` workflow:
+1. **Test** - Runs RSpec tests against a PostgreSQL database
+2. **Semantic Release** - Analyzes commit messages and creates releases
+3. **Build & Push** - Builds multi-architecture Docker images (amd64/arm64)
+
+All steps run automatically on push to `main` or when creating pull requests.
