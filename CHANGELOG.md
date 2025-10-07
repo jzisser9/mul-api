@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/jzisser9/mul-api/compare/v1.1.1...v1.2.0) (2025-10-07)
+
+
+### Features
+
+* enhance Docker tagging strategy with comprehensive version tags ([9eb5a43](https://github.com/jzisser9/mul-api/commit/9eb5a43e58c75e6ba1504b8b7b246487f8f67cda))
+
 ## [1.1.1](https://github.com/jzisser9/mul-api/compare/v1.1.0...v1.1.1) (2025-10-07)
 
 
