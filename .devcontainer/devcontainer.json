@@ -15,8 +15,6 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "rebornix.Ruby",
-        "wingrunr21.vscode-ruby",
         "kaiwood.endwise",
         "connorshea.vscode-ruby-test-adapter",
         "bradlc.vscode-tailwindcss",
