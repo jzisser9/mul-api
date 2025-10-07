@@ -98,13 +98,49 @@ docker-compose up
 ```
 
 #### Production
+
+**Option 1: Using DATABASE_URL**
 ```bash
 docker pull ghcr.io/jzisser9/mul-api:latest
 docker run -p 3001:3001 \
-  -e DATABASE_URL=your_database_url \
+  -e DATABASE_URL=postgres://user:password@host:port/database_name \
   -e RAILS_ENV=production \
   ghcr.io/jzisser9/mul-api:latest
 ```
+
+**Option 2: Using individual database environment variables**
+```bash
+docker pull ghcr.io/jzisser9/mul-api:latest
+docker run -p 3001:3001 \
+  -e DATABASE_HOST=your-postgres-host \
+  -e DATABASE_USER=your-postgres-user \
+  -e DATABASE_PASSWORD=your-postgres-password \
+  -e DATABASE_PORT=5432 \
+  -e RAILS_ENV=production \
+  -e RAILS_LOG_TO_STDOUT=true \
+  -e RAILS_SERVE_STATIC_FILES=true \
+  ghcr.io/jzisser9/mul-api:latest
+```
+
+### Container Environment Configuration
+
+The following environment variables are required for production deployment:
+
+#### Database Connection (Required)
+- `DATABASE_HOST` - PostgreSQL server hostname
+- `DATABASE_USER` - PostgreSQL username  
+- `DATABASE_PASSWORD` - PostgreSQL password
+- `DATABASE_PORT` - PostgreSQL port (default: 5432)
+
+Alternatively, use:
+- `DATABASE_URL` - Full PostgreSQL connection string
+
+#### Rails Configuration (Recommended)
+- `RAILS_ENV=production` - Run in production mode
+- `RAILS_LOG_TO_STDOUT=true` - Log to container stdout for monitoring
+- `RAILS_SERVE_STATIC_FILES=true` - Serve static assets without nginx
+
+See `.env.example` for a complete configuration template.
 
 ### Workflow Details
 
