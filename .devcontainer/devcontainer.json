@@ -54,6 +54,11 @@
           "signatureHelp": true,
           "typeHierarchy": true
         },
+        "rubyLsp.rubyVersionManager": {
+          "identifier": "none"
+        },
+        "rubyLsp.customRubyCommand": "/usr/local/rvm/gems/ruby-3.1.2/bin/ruby",
+        "rubyLsp.bundleGemfile": "/workspace/Gemfile",
         "rubyLsp.formatter": "rubocop",
         "files.associations": {
           "*.rb": "ruby",
