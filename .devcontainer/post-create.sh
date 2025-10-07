@@ -10,6 +10,11 @@ ruby --version
 gem --version
 bundler --version
 
+# Add project bin directory to PATH for binstubs
+echo "🔧 Adding bin directory to PATH..."
+echo 'export PATH="./bin:$PATH"' >> ~/.bashrc
+export PATH="./bin:$PATH"
+
 # Install Ruby gems
 echo "📦 Installing Ruby gems..."
 bundle install
@@ -45,8 +50,9 @@ fi
 echo "✅ Development environment setup complete!"
 echo ""
 echo "🎉 You can now start developing!"
-echo "   • Run 'bundle exec rails server -b 0.0.0.0 -p 3001' to start the Rails server"
-echo "   • Run 'bundle exec rspec' to run tests"
+echo "   • Run 'rails server -b 0.0.0.0 -p 3001' to start the Rails server"
+echo "   • Run 'rspec' to run tests"
 echo "   • Run '.devcontainer/check-git-ssh.sh' to verify Git/SSH setup"
 echo "   • The app will be available at http://localhost:3001"
+echo "   • All Rails commands are available via binstubs (no need for 'bundle exec')"
 echo ""
