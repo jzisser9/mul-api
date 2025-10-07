@@ -1,6 +1,6 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -24,6 +24,9 @@ module MulApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.hosts << "mul-api.duckdns.org"
+    config.hosts << 'mul-api.duckdns.org'
+
+    # Skip encrypted credentials for simple public API deployment
+    config.require_master_key = false
   end
 end
