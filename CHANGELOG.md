@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/jzisser9/mul-api/compare/v1.2.0...v1.3.0) (2025-10-07)
+
+
+### Features
+
+* add Portainer webhook integration for automatic redeployment ([b16809c](https://github.com/jzisser9/mul-api/commit/b16809ca505c10eb4084f7f3a9e1f5e105fd593a))
+
 # [1.2.0](https://github.com/jzisser9/mul-api/compare/v1.1.1...v1.2.0) (2025-10-07)
 
 
