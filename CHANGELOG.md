@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/jzisser9/mul-api/compare/v1.5.2...v1.5.3) (2025-10-08)
+
+
+### Bug Fixes
+
+* remove encrypted credentials system for simple public API deployment ([ff7742d](https://github.com/jzisser9/mul-api/commit/ff7742dbb8e97c080555ea9a68905e12cf73078c))
+
 ## [1.5.2](https://github.com/jzisser9/mul-api/compare/v1.5.1...v1.5.2) (2025-10-07)
 
 
