@@ -26,7 +26,6 @@ services:
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
-      RAILS_MASTER_KEY: b4e587268afe28a59accf21d654607c8
 
 volumes:
   postgres_data:
