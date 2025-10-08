@@ -53,7 +53,7 @@ group :development do
 end
 
 gem "dotenv-rails"
-gem "grape", "~> 1.6"
+gem "grape", "~> 2.4"
 gem "grape-entity", "~> 0.10.2"
 gem "grape_on_rails_routes", "~> 0.3.2"
 gem "nokogiri", "~> 1.13"
