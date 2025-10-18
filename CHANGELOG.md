@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/jzisser9/mul-api/compare/v1.5.3...v1.5.4) (2025-10-18)
+
+
+### Bug Fixes
+
+* trigger new Docker build without encrypted credentials file ([1f672f0](https://github.com/jzisser9/mul-api/commit/1f672f00e4bad1ac937b2566e72233cf966f0c34))
+
 ## [1.5.3](https://github.com/jzisser9/mul-api/compare/v1.5.2...v1.5.3) (2025-10-08)
 
 
