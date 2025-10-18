@@ -7,6 +7,7 @@ echo "DATABASE_HOST: ${DATABASE_HOST:-'Not set'}"
 echo "DATABASE_USER: ${DATABASE_USER:-'Not set'}"
 echo "DATABASE_PORT: ${DATABASE_PORT:-'5432 (default)'}"
 echo "DATABASE_PASSWORD: ${DATABASE_PASSWORD:+'***SET***'}"
+echo "Credentials file removed - no encryption issues"
 echo "====================================="
 
 # Wait for database to be ready if host is specified
