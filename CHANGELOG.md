@@ -1,3 +1,10 @@
+## [1.5.5](https://github.com/jzisser9/mul-api/compare/v1.5.4...v1.5.5) (2025-10-18)
+
+
+### Bug Fixes
+
+* add SECRET_KEY_BASE for Rails production environment ([378f20e](https://github.com/jzisser9/mul-api/commit/378f20e38a30dbe4358c125b83d2b1e0423e3ccc))
+
 ## [1.5.4](https://github.com/jzisser9/mul-api/compare/v1.5.3...v1.5.4) (2025-10-18)
 
 
